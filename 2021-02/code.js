@@ -25,6 +25,8 @@ const getAnswer1 = () => {
 let answer1 = getAnswer1();
 console.log(`Answer 1 final coords: ${answer1.x}, ${answer1.y} = `, answer1.x * answer1.y);
 
+// -----------------------------------------------------------
+
 const movementMap2 = {
     forward: (coord, move) => {
         coord.x = coord.x + parseInt(move);
