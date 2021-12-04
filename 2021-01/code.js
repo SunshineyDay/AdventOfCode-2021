@@ -2,7 +2,7 @@
 const reader = require("../Utils/readFile");
 const data = reader.readFile(`${__dirname}\\input.txt`);
 
-const processData = () => {
+const getAnswer1 = () => {
     let result = data.reduce((accumulator, current, index, data) => {
         if (index !== 0 && parseInt(current) > parseInt(data[index - 1])) {
             return accumulator + 1;
@@ -12,10 +12,30 @@ const processData = () => {
     return result;
 }
 
+const sumArray = (prev, curr) => parseInt(prev) + parseInt(curr);
 
-let answer1 = processData();
+const getAnswer2 = () => {
+    let result = data.reduce((accumulator, current, index, originalArray) => {
+
+        if (index <= data.length - 2) {
+            let window1 = data.slice(index, index + 3);
+            let window2 = data.slice(index + 1, index + 1 + 3);
+
+            if (window1.reduce(sumArray) < window2.reduce(sumArray)) {
+                return accumulator + 1;
+            }
+            return accumulator;
+        }
+        return accumulator;
+
+    }, 0);
+
+    return result;
+}
+
+
+let answer1 = getAnswer1();
 console.log("Answer 1: ", answer1);
 
-// let result2 = findTriple(data, 2020);
-// console.log("Result: ", result2);
-// console.log("Answer: ", result2[0] * result2[1] * result2[2]);
+let answer2 = getAnswer2();
+console.log("Answer 2: ", answer2);
